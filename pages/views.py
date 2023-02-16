@@ -1,11 +1,15 @@
 from django.shortcuts import render, HttpResponse
 
+from .models import SiteInfo
+
 # Create your views here.
 def home_view(request):
-    context = {
-        "name": "Imre Hovodzak",
-        "subtitle": "photography"
-    }
+    data = SiteInfo.objects.all()
+    context = {}
+
+    if data:
+        context = {"data": data[0]}
+
     return render(request, "home.html", context)
 
 def about_view(request):
