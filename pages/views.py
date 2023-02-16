@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 
-from .models import SiteInfo
+from .models import SiteInfo, About
 
 # Create your views here.
 def home_view(request):
@@ -13,6 +13,9 @@ def home_view(request):
     return render(request, "home.html", context)
 
 def about_view(request):
+    data = About.objects.all()
+    if data:
+        return render(request, "about.html", {"data": data[0]})
     return render(request, "about.html")
 
 def contact_view(request):
